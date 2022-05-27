@@ -4,8 +4,8 @@ FROM mautic/mautic:v4-apache
 RUN apt-get clean && apt-get update -qq && apt-get install -y awscli libzip-dev && \
     rm -rf /var/lib/apt/lists/* /var/cache/apk/*
 
-COPY ./secrets_entrypoint.sh /usr/local/bin/secrets_entrypoint.sh
-COPY ./rds-combined-ca-bundle.pem /usr/local/etc/rds-combined-ca-bundle.pem
+COPY ./secrets_entrypoint.sh /var/www/html/secrets_entrypoint.sh
+COPY ./rds-combined-ca-bundle.pem /var/www/html/rds-combined-ca-bundle.pem
 
 RUN docker-php-ext-install mysqli zip
 
