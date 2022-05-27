@@ -10,6 +10,10 @@ workflows:
   deploy-staging:
     jobs:
       - aws-ecr/build-and-push-image:
+          filters:
+            branches:
+              only:
+                - develop
           context:
             - ecs-deploys
           repo: '${AWS_ECR_REPO_NAME}'
@@ -50,6 +54,10 @@ workflows:
   deploy-production:
     jobs:
       - aws-ecr/build-and-push-image:
+          filters:
+            branches:
+              only:
+                - main
           context:
             - ecs-deploys
           repo: '${AWS_ECR_REPO_NAME}'
