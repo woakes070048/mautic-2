@@ -14,3 +14,12 @@ To test a build locally:
 Deployment are automatic:
 * from `develop` to [Staging](https://mautic-staging.thebiggivetest.org.uk)
 * from `main` to [Production](https://mautic-production.thebiggive.org.uk)
+
+## Volumes and files added in the image
+
+The 2 additional files for ECS runs to work are added by our `Dockerfile`
+to `/usr/local/etc`.
+
+Mautic's persisted data lives at `/var/www/html` – we don't modify the
+official image's assumptions around this. On ECS a persistent volume
+(e.g. an EFS mount) must be mapped to this internal path.
