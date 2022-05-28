@@ -22,7 +22,7 @@ services:
     depends_on:
       - mauticdb
     ports:
-      - 8080:80
+      - '8080:80'
     volumes:
       - mautic_data:/var/www/html
     environment:
