@@ -9,3 +9,5 @@ COPY ./secrets_entrypoint.sh /usr/local/etc/secrets_entrypoint.sh
 RUN docker-php-ext-install mysqli zip
 
 EXPOSE 80
+
+ENTRYPOINT /usr/local/etc/secrets_entrypoint.sh apache2-foreground
