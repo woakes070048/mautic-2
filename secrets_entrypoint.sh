@@ -12,5 +12,5 @@ fi
 # Load the S3 secrets file contents into the environment variables
 export $(aws s3 cp s3://${SECRETS_BUCKET_NAME}/secrets - | grep -v '^#' | xargs)
 
-# Call the normal web server entry-point script
-apache2-foreground "$@"
+# Call the normal Mautic Apache entrypoint script
+/entrypoint.sh "$@"
