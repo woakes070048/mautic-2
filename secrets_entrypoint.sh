@@ -4,13 +4,13 @@
 # and is used to set up app secrets in ECS without exposing them as widely as using ECS env vars directly would.
 
 # Check that the environment variable has been set correctly
-#if [ -z "$SECRETS_BUCKET_NAME" ]; then
-#  echo >&2 'error: missing SECRETS_BUCKET_NAME environment variable'
-#  exit 1
-#fi
-#
-## Load the S3 secrets file contents into the environment variables
-#export $(aws s3 cp s3://${SECRETS_BUCKET_NAME}/secrets - | grep -v '^#' | xargs)
+if [ -z "$SECRETS_BUCKET_NAME" ]; then
+  echo >&2 'error: missing SECRETS_BUCKET_NAME environment variable'
+  exit 1
+fi
+
+# Load the S3 secrets file contents into the environment variables
+export $(aws s3 cp s3://${SECRETS_BUCKET_NAME}/secrets - | grep -v '^#' | xargs)
 
 # Fix redirect loop behind ALB. https://forum.mautic.org/t/mautic-redirect-loop/16990/3
 # For now we do this on 2nd run to keep the config simple, so only the 2nd deploy to a given env will work
