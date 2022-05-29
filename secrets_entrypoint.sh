@@ -19,7 +19,7 @@ export $(aws s3 cp s3://${SECRETS_BUCKET_NAME}/secrets - | grep -v '^#' | xargs)
 # Second run: this entrypoint picks up the existence of the installation and replaces index.php with the custom one.
 INDEX_FILE="/var/www/html/index.php"
 if test -f "$INDEX_FILE"; then
-  cp /usr/local/etc/alb-safe-index.php /var/www/html/index.php
+  cp /usr/local/etc/alb-safe-index.php "$INDEX_FILE"
   echo "SSL modification applied"
 fi
 
