@@ -5,6 +5,7 @@ RUN apt-get clean && apt-get update -qq && apt-get install -y awscli libzip-dev 
     rm -rf /var/lib/apt/lists/* /var/cache/apk/*
 
 COPY ./secrets_entrypoint.sh /usr/local/etc/secrets_entrypoint.sh
+COPY ./alb-safe-index.php /usr/local/etc/alb-safe-index.php
 
 RUN docker-php-ext-install mysqli zip
 
