@@ -6,6 +6,8 @@ RUN apt-get clean && apt-get update -qq && apt-get install -y awscli libzip-dev 
 
 COPY ./secrets_entrypoint.sh /usr/local/etc/secrets_entrypoint.sh
 COPY ./alb-safe-index.php /usr/local/etc/alb-safe-index.php
+COPY ./apache-conf/mpm-prefork.conf /etc/apache2/mods-available/mpm-prefork.conf
+RUN ln -s /etc/apache2/mods-available/mpm-prefork.conf /etc/apache2/mods-enabled/mpm-prefork.conf
 
 RUN docker-php-ext-install mysqli zip
 
