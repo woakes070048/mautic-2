@@ -166,6 +166,8 @@ if ! grep -Fq "secret_key" /var/www/html/app/config/local.php; then
     fi
 
     sudo -Eu www-data php /var/www/html/bin/console mautic:install ${INSTALL_PARAMS[@]}
+
+    echo >&2 "Completed installation"
   else
     echo >&2 "URL & Admin credentials not supplied, please install mautic manually."
   fi
@@ -226,7 +228,7 @@ fi
 INDEX_FILE="/var/www/html/index.php"
 if test -f "$INDEX_FILE"; then
   cp /usr/local/etc/alb-safe-index.php "$INDEX_FILE"
-  echo "SSL modification applied"
+  echo >&2 "SSL modification applied"
 fi
 
 ### End Big Give ALB workaround ###
