@@ -14,6 +14,10 @@ COPY ./secrets_entrypoint.sh /usr/local/etc/secrets_entrypoint.sh
 COPY ./alb-safe-index.php /usr/local/etc/alb-safe-index.php
 COPY ./entrypoint.sh /entrypoint.sh
 
+# Apply recommend PHP configuration for best stability and performance.
+COPY ./php-conf/assert.ini /usr/local/etc/php/conf.d/assert.ini
+
+# Increase threads allowed to reduce risk of Apache bail outs. (Probably redundant?)
 COPY ./apache-conf/mpm-prefork.conf /etc/apache2/mods-available/mpm-prefork.conf
 RUN ln -s /etc/apache2/mods-available/mpm-prefork.conf /etc/apache2/mods-enabled/mpm-prefork.conf
 
