@@ -29,7 +29,7 @@ workflows:
           aws-region: AWS_REGION
           family: 'tbg-staging-${AWS_REGION}-${AWS_ECS_SERVICE_SUFFIX}' # also sets `service`
           cluster: 'tbg-staging-${AWS_REGION}'
-          container-image-name-updates: 'container=mautic,tag=staging-${CIRCLE_SHA1}'
+          container-image-name-updates: 'container=mautic_web,tag=staging-${CIRCLE_SHA1}'
           post-steps:
             - slack/notify:
                 event: fail
@@ -74,7 +74,7 @@ workflows:
           aws-region: AWS_REGION
           family: 'tbg-production-${AWS_REGION}-${AWS_ECS_SERVICE_SUFFIX}' # also sets `service`
           cluster: 'tbg-production-${AWS_REGION}'
-          container-image-name-updates: 'container=mautic,tag=production-${CIRCLE_SHA1}'
+          container-image-name-updates: 'container=mautic_web,tag=production-${CIRCLE_SHA1}'
           post-steps:
             - slack/notify:
                 event: fail
