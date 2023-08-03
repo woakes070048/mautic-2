@@ -1,11 +1,25 @@
 # The Big Give's Mautic
 
-This repository is a thin layer for tooling used by the Big Give to
-test and deploy Mautic.
+We use Mautic's official Composer recommendation repository and its Composer
+packages as the basis for building this, with scaffolding `.gitignore`d
+to keep the repository compact.
 
-The Docker tag `mautic/mautic:v4-apache`, managed by the Mautic community,
-is the basis for the app code. Everything we do should extend and
-minimally alter the app we pull from the upstream, official Docker images.
+The `Dockerfile` runs `composer install`, which has a post-install script to
+generate scaffolding whenever it's not present.
+
+We don't use the official Docker image as it [is not really maintained](https://github.com/mautic/docker-mautic/issues/240)
+as of August 2023, and when we tried Apache tags they were too old to be usable – as
+well as e.g. not using Composer. We tried another unofficial experimental repo but also
+found it to not quite work and be very different from other web things we deploy to ECS.
+
+## `cron` tasks
+
+In an effort to avoid re-working too much of the outdated Docker repo's entrypoint logic, we add `cron`
+to our Linux base – everything in one container – which is not very Docker-y or horizontal scaling-safe.
+We should probably take a closer look at what scheduled commands do and any locking ability before running
+this live, particularly with more than one task in an ECS Service.
+
+## Local runs
 
 To test a build locally:
 
@@ -22,4 +36,6 @@ to `/usr/local/etc`.
 
 Mautic's persisted data lives at `/var/www/html` – we don't modify the
 official image's assumptions around this. On ECS a persistent volume
-(e.g. an EFS mount) must be mapped to this internal path.
+(e.g. an EFS mount) can be mapped to this internal path, or the S3 plugin
+can be used to make the media approach more 12-factor-friendly. (The latter
+would probably be better if it works, but is not yet tested!)

@@ -1,1 +1,13 @@
 .idea/
+
+# All generated as part of Mautic scaffolding.
+.env
+.env.dist
+app/.htaccess
+bin/*
+autoload.php
+docroot/
+Gruntfile.js
+package.json
+package-lock.json
+vendor/
