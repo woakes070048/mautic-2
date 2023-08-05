@@ -85,18 +85,20 @@ if [ -n "$MAUTIC_CRON_DYNAMICS" ]; then
         echo "10,40 * * * *     www-data   php /var/www/html/app/console mautic:integration:fetchleads -i Dynamics > /var/log/cron.pipe 2>&1" >> /etc/cron.d/mautic
 fi
 
-if ! [ -e index.php -a -e app/AppKernel.php ]; then
-        echo >&2 "Mautic not found in $(pwd) - copying now..."
-
-        if [ "$(ls -A)" ]; then
-                echo >&2 "WARNING: $(pwd) is not empty - press Ctrl+C now if this is an error!"
-                ( set -x; ls -A; sleep 10 )
-        fi
-
-        tar cf - --one-file-system -C /usr/src/mautic . | tar xf -
-
-        echo >&2 "Complete! Mautic has been successfully copied to $(pwd)"
-fi
+# Mautic copy step removed – with official Docker entrypoint version kept commented for reference – as we should
+# exclusively use Composer to get core files with the new build approach.
+#if ! [ -e index.php -a -e app/AppKernel.php ]; then
+#        echo >&2 "Mautic not found in $(pwd) - copying now..."
+#
+#        if [ "$(ls -A)" ]; then
+#                echo >&2 "WARNING: $(pwd) is not empty - press Ctrl+C now if this is an error!"
+#                ( set -x; ls -A; sleep 10 )
+#        fi
+#
+#        tar cf - --one-file-system -C /usr/src/mautic . | tar xf -
+#
+#        echo >&2 "Complete! Mautic has been successfully copied to $(pwd)"
+#fi
 
 # Ensure the MySQL Database is created
 php /makedb.php "$MAUTIC_DB_HOST" "$MAUTIC_DB_USER" "$MAUTIC_DB_PASSWORD" "$MAUTIC_DB_NAME"
