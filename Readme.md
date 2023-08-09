@@ -1,4 +1,4 @@
-# The Big Give's Mautic
+# Big Give Mautic
 
 We use Mautic's official Composer recommendation repository and its Composer
 packages as the basis for building this, with scaffolding `.gitignore`d
