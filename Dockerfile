@@ -27,10 +27,10 @@ COPY ./php-conf/assert.ini /usr/local/etc/php/conf.d/assert.ini
 RUN mkdir /var/www/.composer
 RUN chown www-data:www-data /var/www/.composer
 
-# We could probably just mkdir this, but maybe slightly clearer what's going on from scanning
-# the repo folder structure when it's there from the start?
-COPY ./public /var/www/html/public
-RUN chown -R www-data:www-data /var/www/html/public
+COPY ./app /var/www/html/app
+COPY ./bin /var/www/html/bin
+COPY ./var /var/www/html/var
+RUN chown -R www-data:www-data /var/www/html
 
 USER www-data
 

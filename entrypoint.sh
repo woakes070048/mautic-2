@@ -86,7 +86,8 @@ if [ -n "$MAUTIC_CRON_DYNAMICS" ]; then
 fi
 
 # Mautic copy step removed – with official Docker entrypoint version kept commented for reference – as we should
-# exclusively use Composer to get core files with the new build approach.
+# exclusively use Composer to get core files with the new build approach – and this will mean that "/var/www/html
+# is not empty".
 #if ! [ -e index.php -a -e app/AppKernel.php ]; then
 #        echo >&2 "Mautic not found in $(pwd) - copying now..."
 #
@@ -120,17 +121,6 @@ php /makeconfig.php
 echo >&2 "========================================================================"
 echo >&2
 echo >&2
-
-# Make sure our web user owns the config file
-chown www-data:www-data app/config/local.php
-
-# Make sure logs exists and is owned by www-data
-mkdir -p /var/www/html/app/logs
-chown -R www-data:www-data /var/www/html/app/logs
-
-# Make sure cache exists and is owned by www-data
-mkdir -p /var/www/html/var/cache/prod
-chown -R www-data:www-data /var/www/html/var/cache
 
 if ! grep -Fq "secret_key" /var/www/html/app/config/local.php; then
   echo >&2 "========================================================================"

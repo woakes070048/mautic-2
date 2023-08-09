@@ -6,11 +6,8 @@
 app/.htaccess
 bin/*
 autoload.php
-# Default location – if config customisation is working, this stuff should now land in public/
-# docroot/
+docroot/
 Gruntfile.js
 package.json
 package-lock.json
-public/*
-!public/.gitkeep
 vendor/

@@ -29,8 +29,6 @@ services:
       - mauticdb
     ports:
       - '8080:80'
-    volumes:
-      - mautic_data:/var/www/html
     environment:
       - MAUTIC_DB_HOST=mauticdb
       - MAUTIC_DB_USER=root
@@ -43,8 +41,6 @@ services:
 
 volumes:
   mysql_data:
-    driver: local
-  mautic_data:
     driver: local
 networks:
   mautic-net:

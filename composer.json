@@ -92,23 +92,23 @@
   },
   "autoload": {
     "psr-4": {
-      "MauticPlugin\\": "public/plugins/"
+      "MauticPlugin\\": "docroot/plugins/"
     }
   },
   "extra": {
     "mautic-scaffold": {
       "locations": {
-        "web-root": "public/"
+        "web-root": "docroot/"
       }
     },
     "installer-paths": {
-      "public/app": [
+      "docroot/app": [
         "type:mautic-core"
       ],
-      "public/plugins/{$name}": [
+      "docroot/plugins/{$name}": [
         "type:mautic-plugin"
       ],
-      "public/themes/{$name}": [
+      "docroot/themes/{$name}": [
         "type:mautic-theme"
       ]
     },
