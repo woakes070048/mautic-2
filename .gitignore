@@ -6,6 +6,8 @@
 app/.htaccess
 bin/*
 !bin/.htaccess
+var/*
+!var/cache/prod/.gitkeep
 autoload.php
 docroot/
 Gruntfile.js
