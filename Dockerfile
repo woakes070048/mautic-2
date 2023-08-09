@@ -39,7 +39,7 @@ COPY ./composer.lock /var/www/html/composer.lock
 
 # Install PHP dependencies, as www-data. This also generates all Mautic scaffolding
 # files if not already there.
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+RUN composer install --no-interaction --optimize-autoloader
 
 USER root
 
