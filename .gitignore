@@ -5,6 +5,7 @@
 .env.dist
 app/.htaccess
 bin/*
+!bin/.htaccess
 autoload.php
 docroot/
 Gruntfile.js
