@@ -17,7 +17,7 @@ COPY ./secrets_entrypoint.sh /usr/local/etc/secrets_entrypoint.sh
 
 # Modify the standard Mautic index.php and the entrypoint which installs it,
 # to fix infinite redirect loops behind an ALB with SSL.
-COPY ./alb-safe-index.php /usr/local/etc/alb-safe-index.php
+#COPY ./alb-safe-index.php /usr/local/etc/alb-safe-index.php
 COPY ./entrypoint.sh /entrypoint.sh
 
 # Apply recommend PHP configuration for best stability and performance.
@@ -42,6 +42,9 @@ COPY ./composer.lock /var/www/html/composer.lock
 RUN composer install --no-interaction --optimize-autoloader
 
 USER root
+
+COPY ./apache-conf/redirects.conf /etc/apache2/conf-available/redirects.conf
+RUN a2enconf redirects
 
 EXPOSE 80
 

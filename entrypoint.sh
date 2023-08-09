@@ -122,6 +122,11 @@ echo >&2 "======================================================================
 echo >&2
 echo >&2
 
+echo "configs are..."
+ls -la /var/www/html/app/config
+echo "local.php is..."
+cat /var/www/html/app/config/local.php
+
 if ! grep -Fq "secret_key" /var/www/html/app/config/local.php; then
   echo >&2 "========================================================================"
   echo >&2 "Mautic not currently installed (no secret_key in local.php)"
@@ -217,11 +222,11 @@ fi
 ### Start Big Give ALB workaround ###
 
 # Fix redirect loop behind ALB. https://forum.mautic.org/t/mautic-redirect-loop/16990/3
-INDEX_FILE="/var/www/html/index.php"
-if test -f "$INDEX_FILE"; then
-  cp /usr/local/etc/alb-safe-index.php "$INDEX_FILE"
-  echo >&2 "SSL modification applied"
-fi
+#INDEX_FILE="/var/www/html/index.php"
+#if test -f "$INDEX_FILE"; then
+#  cp /usr/local/etc/alb-safe-index.php "$INDEX_FILE"
+#  echo >&2 "SSL modification applied"
+#file
 
 ### End Big Give ALB workaround ###
 
