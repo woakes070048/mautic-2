@@ -152,6 +152,24 @@ if ! grep -Fq "secret_key" /var/www/html/app/config/local.php; then
       fi
     fi
 
+    if [ -n "$MAUTIC_DB_USER" ]; then
+      INSTALL_PARAMS+=(--db_user="$MAUTIC_DB_USER")
+    fi
+
+    if [ -n "$MAUTIC_DB_NAME" ]; then
+      INSTALL_PARAMS+=(--db_name="$MAUTIC_DB_NAME")
+    fi
+
+    if [ -n "$MAUTIC_DB_PASSWORD" ]; then
+      INSTALL_PARAMS+=(--db_password="$MAUTIC_DB_PASSWORD")
+    fi
+
+    if [ -n "$MAUTIC_DB_HOST" ]; then
+      INSTALL_PARAMS+=(--db_host="$MAUTIC_DB_HOST")
+    fi
+
+      INSTALL_PARAMS+=(--db_port=3306) # hack to get this working for now - will have to change if we want to use a different port.
+
     if [ -n "$MAUTIC_ADMIN_USERNAME" ]; then
       INSTALL_PARAMS+=(--admin_username="$MAUTIC_ADMIN_USERNAME")
     fi
