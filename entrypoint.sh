@@ -180,6 +180,14 @@ if ! grep -Fq "secret_key" /var/www/html/app/config/local.php; then
       INSTALL_PARAMS+=(--admin_lastname="$MAUTIC_ADMIN_LASTNAME")
     fi
 
+    if [ -n "$MAUTIC_ADMIN_EMAIL" ]; then
+      INSTALL_PARAMS+=(--admin_email="$MAUTIC_ADMIN_EMAIL")
+    fi
+
+    if [ -n "$MAUTIC_ADMIN_PASSWORD" ]; then
+      INSTALL_PARAMS+=(--admin_password="$MAUTIC_ADMIN_PASSWORD")
+    fi
+
     php /var/www/html/bin/console mautic:install "${INSTALL_PARAMS[@]}"
 
     echo >&2 "Completed installation"
