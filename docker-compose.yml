@@ -14,10 +14,6 @@ services:
     networks:
       - mautic-net
 
-  # To test locally, temporarily remove the `alb-safe-index.php` modification
-  # (either in that file or by commenting the relevant bit of `entrypoint.sh`
-  # before the build). And comment the S3 custom bits of `secrets_entrypoint.sh`
-  # or stop the image using that entrypoint.
   mautic:
     build:
       context: .
@@ -31,10 +27,6 @@ services:
     ports:
       - '8080:80'
     environment:
-      - MAUTIC_DB_HOST=mauticdb:3306 # makeconfig.php sets the required port but only when it's explicit after : here
-      - MAUTIC_DB_USER=root
-      - MAUTIC_DB_PASSWORD=mysecret
-      - MAUTIC_DB_NAME=mautic
       - MAUTIC_ENV=dev
       - MAUTIC_RUN_CRON_JOBS=true
       - MAUTIC_URL=http://localhost:8080
