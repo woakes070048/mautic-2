@@ -27,7 +27,11 @@ services:
     ports:
       - '8080:80'
     environment:
-      - MAUTIC_ENV=dev
+      - MAUTIC_DB_HOST=mauticdb
+      - MAUTIC_DB_USER=root
+      - MAUTIC_DB_PASSWORD=mysecret
+      - MAUTIC_DB_NAME=mautic
+      - MAUTIC_ENV=local
       - MAUTIC_RUN_CRON_JOBS=true
       - MAUTIC_URL=http://localhost:8080
     networks:
