@@ -6,4 +6,5 @@ $parameters = array (
     'db_name' => getenv('MAUTIC_DB_NAME'),
     'db_user' => getenv('MAUTIC_DB_USER'),
     'db_password' => getenv('MAUTIC_DB_PASSWORD'),
+    'site_url' => getenv('MAUTIC_URL'),
 );
